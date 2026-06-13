@@ -1,3 +1,4 @@
+import { ImageIcon, Star, Search, UserCircle } from "lucide-react";
 const MobileNav = ({ hidden }) => {
   return (
     <nav

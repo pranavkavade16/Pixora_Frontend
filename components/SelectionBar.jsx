@@ -1,3 +1,4 @@
+import { X, Share2, ArrowDownToLine, Trash2 } from "lucide-react";
 const SelectionBar = ({ count, onClear }) => {
   return (
     <aside

@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 const PhotoCard = ({ photo, selected, onToggle }) => {
   return (
     <button

@@ -1,3 +1,10 @@
+import {
+  ArrowLeft,
+  ImageIcon,
+  Search,
+  Share2,
+  CalendarDays,
+} from "lucide-react";
 const TopNav = () => {
   return (
     <header className="kp-nav">
@@ -36,7 +43,7 @@ const TopNav = () => {
           >
             <CalendarDays size={20} />
           </button>
-          <img className="user-avatar" src={userAvatar} alt="User profile" />
+          <img className="user-avatar" alt="User profile" />
         </div>
       </div>
     </header>

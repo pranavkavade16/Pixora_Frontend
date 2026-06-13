@@ -3,14 +3,14 @@ import AvatarStack from "../components/AvatarStack";
 import FilterBar from "../components/FilterBar";
 import MobileNav from "../components/MobileNav";
 import PhotoCard from "../components/PhotoCard";
-import Selection from "../components/SelectionBar";
+import PhotoGrid from "../components/PhotoGrid";
+import SelectionBar from "../components/SelectionBar";
 import TopNav from "../components/TopNav";
 import { useState, useMemo } from "react";
 import {
   ArrowDownToLine,
   ArrowLeft,
   CalendarDays,
-  ChevronDown,
   Image as ImageIcon,
   Search,
   Share2,
@@ -21,6 +21,7 @@ import {
   UserCircle,
   X,
 } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const avatars = [
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBjaEkMEF1luzMZHgnKbdBcQdXtw_hEdHljWw3EXYvhON8rPH5ef1eI1FPER_4eqNMD_camN5uveGJ9yM5rKWXbo0z_qfRbr9-1DMmlc-332iPBEZIQgulH8-_Cp794ETBPS1JBCMRw51Zjhp5mnAVedASnHFjBkr0NgpAK0bbjr2IoWD68oQc_UdpQKR66acqqxaZ1ZYTFaB4FQTtLkZFrhnNEKQNUv_DWkC2v0YrWeDYJRcNY_gCUlCSIE3A5L7O1PMecyNXkjmEz",
@@ -128,3 +129,5 @@ const AlbumDetails = () => {
     </div>
   );
 };
+
+export default AlbumDetails;

@@ -1,3 +1,4 @@
+import PhotoCard from "./PhotoCard";
 const PhotoGrid = ({
   photos: desktopPhotos,
   mobilePhotos,

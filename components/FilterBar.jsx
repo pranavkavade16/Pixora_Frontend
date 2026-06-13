@@ -1,3 +1,4 @@
+import { Star, SlidersHorizontal, ChevronDown } from "lucide-react";
 const FilterBar = () => {
   const chips = ["All", "Favorites", "Beach", "Architecture"];
   const mobileChips = [
