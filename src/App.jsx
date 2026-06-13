@@ -5,12 +5,13 @@ import {
   Routes,
 } from "react-router-dom";
 import AlbumDetails from "../pages/AlbumDetails";
+import LibraryPage from "../pages/LibraryPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route />
+        <Route path="/" element={<LibraryPage />} />
         <Route path={"/albumDetails"} element={<AlbumDetails />} />
       </Routes>
     </BrowserRouter>
