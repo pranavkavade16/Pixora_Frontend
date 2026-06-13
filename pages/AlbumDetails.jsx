@@ -110,7 +110,6 @@ const AlbumDetails = () => {
 
   return (
     <div className="kp-app">
-      <TopNav />
       <main className="kp-main">
         <AlbumHeader />
         <FilterBar />
