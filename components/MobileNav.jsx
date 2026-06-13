@@ -1,5 +1,4 @@
-
-function MobileNav({ hidden }) {
+const MobileNav = ({ hidden }) => {
   return (
     <nav
       className={hidden ? "mobile-bottom-nav hidden" : "mobile-bottom-nav"}
@@ -23,4 +22,6 @@ function MobileNav({ hidden }) {
       </a>
     </nav>
   );
-}
+};
+
+export default MobileNav;

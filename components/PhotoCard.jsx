@@ -1,4 +1,4 @@
-function PhotoCard({ photo, selected, onToggle }) {
+const PhotoCard = ({ photo, selected, onToggle }) => {
   return (
     <button
       className={selected ? "photo-card selected" : "photo-card"}
@@ -18,4 +18,6 @@ function PhotoCard({ photo, selected, onToggle }) {
       </span>
     </button>
   );
-}
+};
+
+export default PhotoCard;

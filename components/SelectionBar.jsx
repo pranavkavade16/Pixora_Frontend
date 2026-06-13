@@ -1,4 +1,4 @@
-function SelectionBar({ count, onClear }) {
+const SelectionBar = ({ count, onClear }) => {
   return (
     <aside
       className={count > 0 ? "selection-bar visible" : "selection-bar"}
@@ -44,4 +44,6 @@ function SelectionBar({ count, onClear }) {
       </div>
     </aside>
   );
-}
+};
+
+export default SelectionBar;

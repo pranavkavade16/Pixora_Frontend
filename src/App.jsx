@@ -216,7 +216,7 @@ function AlbumHeader() {
             <em>42 photos</em>
           </div>
         </div>
-        {/* <AvatarStack /> */}
+        <AvatarStack />
       </div>
     </section>
   );
