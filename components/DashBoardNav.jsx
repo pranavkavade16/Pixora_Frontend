@@ -5,8 +5,11 @@ import {
   Search,
   Star,
 } from "lucide-react";
+import useAlbumContext from "../context/AlbumContext";
 
 export function DashboardNav() {
+  const { openCreateAlbum, closeCreateAlbum } = useAlbumContext();
+
   return (
     <header className="dashboard-nav">
       <div className="dashboard-nav-inner">
