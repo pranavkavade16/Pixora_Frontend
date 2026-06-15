@@ -61,7 +61,6 @@ const mobileAlbums = [
 function LibraryPage() {
   return (
     <div className="dashboard-page">
-      <DashboardNav />
       <main className="dashboard-main">
         <section className="dashboard-header">
           <h1>My Library</h1>
