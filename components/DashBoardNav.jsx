@@ -8,7 +8,7 @@ import {
 import useAlbumContext from "../context/AlbumContext";
 
 export function DashboardNav() {
-  const { openCreateAlbum, closeCreateAlbum } = useAlbumContext();
+  const { openCreateAlbum} = useAlbumContext();
 
   return (
     <header className="dashboard-nav">
@@ -35,7 +35,7 @@ export function DashboardNav() {
           <button className="icon-btn" type="button" aria-label="Search">
             <Search size={23} />
           </button>
-          <button className="new-album-btn" type="button">
+          <button className="new-album-btn" type="button" onClick={openCreateAlbum}>
             <Plus size={18} />
             <span>New Album</span>
           </button>

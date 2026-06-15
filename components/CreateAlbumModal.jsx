@@ -1,14 +1,16 @@
 import { LockKeyholeOpen } from "lucide-react";
 import { useState } from "react";
+import useAlbumContext from "../context/AlbumContext";
 
 const MAX_ALBUM_NAME = 80;
 
 function CreateAlbumModal({ open = true, onClose, onCreate }) {
+  const [isCreateAlbumOpen, closeCreateAlbum] = useAlbumContext();
   const [albumName, setAlbumName] = useState("");
   const [description, setDescription] = useState("");
   const [isPublic, setIsPublic] = useState(true);
 
-  if (!open) {
+  if (!isCreateAlbumOpen) {
     return null;
   }
 
@@ -32,7 +34,7 @@ function CreateAlbumModal({ open = true, onClose, onCreate }) {
         className="create-album-backdrop"
         type="button"
         aria-label="Close new album dialog"
-        onClick={onClose}
+        onClick={closeCreateAlbum}
       />
 
       <section
