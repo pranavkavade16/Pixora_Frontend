@@ -5,7 +5,7 @@ import useAlbumContext from "../context/AlbumContext";
 const MAX_ALBUM_NAME = 80;
 
 function CreateAlbumModal({ open = true, onClose, onCreate }) {
-  const [isCreateAlbumOpen, closeCreateAlbum] = useAlbumContext();
+  const { isCreateAlbumOpen, closeCreateAlbum } = useAlbumContext();
   const [albumName, setAlbumName] = useState("");
   const [description, setDescription] = useState("");
   const [isPublic, setIsPublic] = useState(true);
@@ -73,22 +73,26 @@ function CreateAlbumModal({ open = true, onClose, onCreate }) {
             />
           </label>
 
-          <label className="public-album-row">
+          <div className="public-album-row">
             <span className="public-album-icon" aria-hidden="true">
-              <LockKeyholeOpen size={36} strokeWidth={1.7} />
+              <LockKeyholeOpen size={30} strokeWidth={1.7} />
             </span>
             <span className="public-album-copy">
               <strong>Public Album</strong>
               <small>Visible to anyone with the link</small>
             </span>
-            <input
-              type="checkbox"
-              checked={isPublic}
-              onChange={(event) => setIsPublic(event.target.checked)}
+            <button
+              className={
+                isPublic ? "public-album-toggle active" : "public-album-toggle"
+              }
+              type="button"
+              onClick={() => setIsPublic((current) => !current)}
+              aria-pressed={isPublic}
               aria-label="Public album"
-            />
-            <span className="public-album-switch" aria-hidden="true" />
-          </label>
+            >
+              <span />
+            </button>
+          </div>
 
           <div className="create-album-actions">
             <button
