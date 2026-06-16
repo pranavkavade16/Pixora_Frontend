@@ -67,9 +67,9 @@ function LibraryPage() {
         pt-10.5
         pb-17
 
-        max-[767px]:px-[13px]
-        max-[767px]:pt-[31px]
-        max-[767px]:pb-[98px]
+        max-[767px]:px-3.25
+        max-[767px]:pt-7.75
+        max-[767px]:pb-24.5
       "
       >
         <section
@@ -77,8 +77,8 @@ function LibraryPage() {
           mb-10
           grid gap-7
 
-          max-[767px]:mb-[30px]
-          max-[767px]:gap-[26px]
+          max-[767px]:mb-7.5
+          max-[767px]:gap-6.5
         "
         >
           <h1
@@ -98,7 +98,7 @@ function LibraryPage() {
 
           <label
             className="
-            relative flex h-[51px] items-center
+            relative flex h-12.75 items-center
             rounded-lg
             border border-[#e5e4e1]
             bg-white
@@ -107,7 +107,7 @@ function LibraryPage() {
             max-[767px]:hidden
           "
           >
-            <Search size={22} className="absolute left-[18px]" />
+            <Search size={22} className="absolute left-4.5" />
 
             <input
               type="search"
@@ -115,7 +115,7 @@ function LibraryPage() {
               className="
               h-full w-full
               bg-transparent
-              pl-12 pr-[18px]
+              pl-12 pr-4.5
 
               text-[15px]
               text-[#111110]
@@ -154,7 +154,7 @@ function LibraryPage() {
 
           max-[767px]:flex
           max-[767px]:flex-col
-          max-[767px]:gap-[33px]
+          max-[767px]:gap-8.25
         "
         >
           {mobileAlbums.map((album) => (

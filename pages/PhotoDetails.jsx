@@ -69,7 +69,7 @@ function CommentItem({ comment }) {
           </span>
           <span className="text-[12px] text-[#a8a7a4]">{comment.time}</span>
         </div>
-        <p className="mt-0.5 text-[14px] leading-[1.5] text-[#464553]">
+        <p className="mt-0.5 text-[14px] leading-normal text-[#464553]">
           {comment.text}
         </p>
       </div>
@@ -95,7 +95,7 @@ function PhotoDetailPage() {
   return (
     <main className="fixed inset-0 z-50 flex h-screen flex-col overflow-hidden bg-[#faf9f7] text-[#111110]">
       {/* Top viewing area */}
-      <section className="relative flex-[0_0_60vh] overflow-hidden bg-black md:flex-[1_1_auto] md:h-[calc(100vh-400px)] md:min-h-[500px] md:flex-none">
+      <section className="relative flex-[0_0_60vh] overflow-hidden bg-black md:h-[calc(100vh-400px)] md:min-h-125 md:flex-none">
         <button
           type="button"
           aria-label="Close"
@@ -140,8 +140,8 @@ function PhotoDetailPage() {
       </section>
 
       {/* Bottom details panel */}
-      <section className="flex-1 overflow-y-auto border-t border-[#e5e4e1] bg-white [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:h-[400px] md:flex-none">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 px-4 py-8 md:grid-cols-12 md:px-12">
+      <section className="flex-1 overflow-y-auto border-t border-[#e5e4e1] bg-white scrollbar-none [&::-webkit-scrollbar]:hidden md:h-100 md:flex-none">
+        <div className="mx-auto grid max-w-300 grid-cols-1 gap-10 px-4 py-8 md:grid-cols-12 md:px-12">
           {/* Left column */}
           <div className="flex min-w-0 flex-col gap-6 md:col-span-7 lg:col-span-8">
             <div className="flex items-start justify-between gap-4">
@@ -234,7 +234,7 @@ function PhotoDetailPage() {
               Engagement
             </h2>
 
-            <div className="max-h-48 overflow-y-auto pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="max-h-48 overflow-y-auto pr-2 scrollbar-none [&::-webkit-scrollbar]:hidden">
               <div className="flex flex-col gap-4">
                 {comments.map((item) => (
                   <CommentItem key={item.name} comment={item} />
