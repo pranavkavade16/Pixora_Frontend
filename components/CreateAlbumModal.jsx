@@ -4,18 +4,18 @@ import useAlbumContext from "../context/AlbumContext";
 
 const MAX_ALBUM_NAME = 80;
 
-function CreateAlbumModal({ open = true, onClose, onCreate }) {
+function CreateAlbumModal({ onClose, onCreate }) {
   const { isCreateAlbumOpen, closeCreateAlbum } = useAlbumContext();
+
   const [albumName, setAlbumName] = useState("");
   const [description, setDescription] = useState("");
   const [isPublic, setIsPublic] = useState(true);
 
-  if (!isCreateAlbumOpen) {
-    return null;
-  }
+  if (!isCreateAlbumOpen) return null;
 
   const submitAlbum = (event) => {
     event.preventDefault();
+
     onCreate?.({
       name: albumName.trim(),
       description: description.trim(),
@@ -23,89 +23,180 @@ function CreateAlbumModal({ open = true, onClose, onCreate }) {
     });
   };
 
-  const counterClassName =
-    albumName.length >= MAX_ALBUM_NAME
-      ? "album-counter limit"
-      : "album-counter";
+  const isLimitReached = albumName.length >= MAX_ALBUM_NAME;
 
   return (
-    <div className="create-album-modal" role="presentation">
+    <div
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-4.5"
+      role="presentation"
+    >
+      {/* Backdrop */}
       <button
-        className="create-album-backdrop"
         type="button"
         aria-label="Close new album dialog"
         onClick={closeCreateAlbum}
+        className="absolute inset-0 bg-black/50 backdrop-blur-[5px]"
       />
 
+      {/* Modal */}
       <section
-        className="create-album-dialog"
         role="dialog"
         aria-modal="true"
         aria-labelledby="create-album-title"
+        className="
+          relative z-10
+          w-full max-w-125
+          max-h-[calc(100vh-36px)]
+          overflow-auto
+          rounded-2xl
+          border border-[#e5e4e1]
+          bg-white
+          shadow-[0_18px_48px_rgba(0,0,0,0.2)]
+        "
       >
-        <header className="create-album-header">
-          <h2 id="create-album-title">New Album</h2>
+        {/* Header */}
+        <header className="border-b border-[#e5e4e1] px-8 py-7 sm:px-8 sm:py-6">
+          <h2
+            id="create-album-title"
+            className="text-[30px] font-semibold tracking-[-0.03em] leading-none text-[#111110]"
+          >
+            New Album
+          </h2>
         </header>
 
-        <form className="create-album-form" onSubmit={submitAlbum}>
-          <label className="create-album-field">
-            <span>Album Name</span>
+        {/* Form */}
+        <form onSubmit={submitAlbum} className="grid gap-6 p-8 sm:p-8">
+          {/* Album Name */}
+          <label className="grid gap-2.5">
+            <span className="text-[15px] text-[#2d2c3d]">Album Name</span>
+
             <input
               type="text"
+              autoFocus
               value={albumName}
-              onChange={(event) => setAlbumName(event.target.value)}
               maxLength={MAX_ALBUM_NAME}
               placeholder="e.g. Summer Portraits 2024"
-              autoFocus
+              onChange={(e) => setAlbumName(e.target.value)}
+              className="
+                h-14
+                w-full
+                rounded-[10px]
+                border border-[#e5e4e1]
+                px-4.5
+                text-base
+                outline-none
+                transition-colors
+                placeholder:text-[#a6a4a0]
+                focus:border-[#d8d6d2]
+              "
             />
-            <em className={counterClassName}>
+
+            <em
+              className={`justify-self-end text-sm not-italic ${
+                isLimitReached ? "text-red-600" : "text-[#8f8d89]"
+              }`}
+            >
               {albumName.length} / {MAX_ALBUM_NAME}
             </em>
           </label>
 
-          <label className="create-album-field">
-            <span>Description (Optional)</span>
+          {/* Description */}
+          <label className="grid gap-2.5">
+            <span className="text-[15px] text-[#2d2c3d]">
+              Description (Optional)
+            </span>
+
             <textarea
+              rows={3}
               value={description}
-              onChange={(event) => setDescription(event.target.value)}
               placeholder="Briefly describe the contents of this album..."
-              rows="3"
+              onChange={(e) => setDescription(e.target.value)}
+              className="
+                min-h-28
+                w-full
+                resize-none
+                rounded-[10px]
+                border border-[#e5e4e1]
+                px-4.5
+                py-4
+                text-base
+                outline-none
+                placeholder:text-[#a6a4a0]
+                focus:border-[#d8d6d2]
+              "
             />
           </label>
 
-          <div className="public-album-row">
-            <span className="public-album-icon" aria-hidden="true">
+          {/* Public Album */}
+          <div className="grid min-h-13 grid-cols-[34px_1fr_58px] items-center gap-3">
+            <span className="flex items-center justify-center text-[#5f5e5b]">
               <LockKeyholeOpen size={30} strokeWidth={1.7} />
             </span>
-            <span className="public-album-copy">
-              <strong>Public Album</strong>
-              <small>Visible to anyone with the link</small>
+
+            <span className="flex flex-col gap-1">
+              <strong className="text-base font-medium text-[#111110]">
+                Public Album
+              </strong>
+
+              <small className="truncate text-sm text-[#5f5e5b]">
+                Visible to anyone with the link
+              </small>
             </span>
+
             <button
-              className={
-                isPublic ? "public-album-toggle active" : "public-album-toggle"
-              }
               type="button"
-              onClick={() => setIsPublic((current) => !current)}
               aria-pressed={isPublic}
               aria-label="Public album"
+              onClick={() => setIsPublic((prev) => !prev)}
+              className={`
+                relative flex h-8.5 w-14.5
+                items-center rounded-full p-0.75
+                transition-all
+                ${isPublic ? "bg-[#4241bc]" : "bg-[#e9e8e6]"}
+              `}
             >
-              <span />
+              <span
+                className={`
+                  h-7 w-7 rounded-full bg-white
+                  shadow-md transition-transform
+                  ${isPublic ? "translate-x-6" : "translate-x-0"}
+                `}
+              />
             </button>
           </div>
 
-          <div className="create-album-actions">
+          {/* Actions */}
+          <div className="grid gap-3 pt-2">
             <button
-              className="create-album-submit"
               type="submit"
               disabled={!albumName.trim()}
+              className="
+                h-13.5
+                w-full
+                rounded-[10px]
+                bg-[#4241bc]
+                text-base
+                font-semibold
+                text-white
+                transition
+                disabled:cursor-not-allowed
+                disabled:opacity-50
+              "
             >
               Create Album
             </button>
+
             <button
-              className="create-album-cancel"
               type="button"
               onClick={onClose}
+              className="
+                h-10
+                w-full
+                rounded-[10px]
+                text-base
+                text-[#5f5e5b]
+                hover:bg-gray-50
+              "
             >
               Cancel
             </button>
