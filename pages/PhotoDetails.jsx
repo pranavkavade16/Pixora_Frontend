@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import PhotoViewer from "../components/photo-detail/PhotoViewer";
-import DesktopDetails from "../components/photo-detail/DesktopDetails";
-import MobileDetails from "../components/photo-detail/MobileDetails";
+import PhotoViewer from "../components/PhotoViewer";
+import PhotoDesktopDetails from "../components/PhotoDesktopDetails";
+import PhotoMobileDetails from "../components/PhotoMobileDetails";
 
 const SAMPLE_PHOTO = {
   id: 1,
@@ -96,7 +96,7 @@ export default function PhotoDetailPage() {
           MOBILE DETAILS
       ======================================================= */}
       <div className="flex-1 overflow-hidden lg:hidden">
-        <MobileDetails
+        <PhotoMobileDetails
           photo={photo}
           favorite={favorite}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
@@ -110,7 +110,7 @@ export default function PhotoDetailPage() {
           DESKTOP DETAILS
       ======================================================= */}
       <div className="hidden flex-1 overflow-hidden lg:block">
-        <DesktopDetails
+        <PhotoDesktopDetails
           photo={photo}
           favorite={favorite}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
