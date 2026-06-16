@@ -1,11 +1,13 @@
 import { LockKeyholeOpen } from "lucide-react";
 import { useState } from "react";
 import useAlbumContext from "../context/AlbumContext";
+import { useAddAlbum } from "../features/albums/hooks/useAddAlbum";
 
 const MAX_ALBUM_NAME = 80;
 
 function CreateAlbumModal({ onClose, onCreate }) {
   const { isCreateAlbumOpen, closeCreateAlbum } = useAlbumContext();
+  const { handleAddAlbum, loading } = useAddAlbum();
 
   const [albumName, setAlbumName] = useState("");
   const [description, setDescription] = useState("");
@@ -15,11 +17,13 @@ function CreateAlbumModal({ onClose, onCreate }) {
 
   const submitAlbum = (event) => {
     event.preventDefault();
+    console.log("Clicked");
 
-    onCreate?.({
+    handleAddAlbum?.({
       name: albumName.trim(),
       description: description.trim(),
-      public: isPublic,
+      ownerId: "6a31773c0dc54daa4bd9902e",
+      sharedUsers: [],
     });
   };
 

@@ -1,5 +1,3 @@
-// src/components/photo-detail/DesktopDetails.jsx
-
 import { useState } from "react";
 import { Plus, Share2, Star, Trash2, Send, X } from "lucide-react";
 
