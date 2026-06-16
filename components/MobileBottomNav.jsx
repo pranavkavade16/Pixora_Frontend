@@ -10,9 +10,9 @@ export function MobileBottomNav() {
         max-[767px]:right-0
         max-[767px]:bottom-0
         max-[767px]:left-0
-        max-[767px]:z-[25]
+        max-[767px]:z-25
         max-[767px]:flex
-        max-[767px]:h-[70px]
+        max-[767px]:h-17.5
         max-[767px]:items-center
         max-[767px]:justify-around
         max-[767px]:border-t

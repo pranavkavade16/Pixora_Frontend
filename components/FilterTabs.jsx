@@ -7,10 +7,10 @@ export function FilterTabs() {
         flex items-center
         border-b border-[#e5e4e1]
 
-        max-[767px]:gap-[14px]
+        max-[767px]:gap-3.5
         max-[767px]:overflow-x-auto
         max-[767px]:border-b-0
-        max-[767px]:[scrollbar-width:none]
+        max-[767px]:scrollbar-none
         [&::-webkit-scrollbar]:hidden
       "
     >
@@ -19,8 +19,8 @@ export function FilterTabs() {
         role="tab"
         aria-selected="true"
         className="
-          min-w-[110px]
-          h-[54px]
+          min-w-27.5
+          h-13.5
           px-6
           text-[13px]
           text-[#4241bc]
@@ -32,7 +32,7 @@ export function FilterTabs() {
           max-[767px]:rounded-full
           max-[767px]:border-0
           max-[767px]:bg-[#4241bc]
-          max-[767px]:px-[22px]
+          max-[767px]:px-5.5
           max-[767px]:text-[11px]
           max-[767px]:text-white
         "
@@ -46,8 +46,8 @@ export function FilterTabs() {
         role="tab"
         aria-selected="false"
         className="
-          min-w-[110px]
-          h-[54px]
+          min-w-27.5
+          h-13.5
           px-6
           text-[13px]
           text-[#5f5e5b]
@@ -59,7 +59,7 @@ export function FilterTabs() {
           max-[767px]:rounded-full
           max-[767px]:border-0
           max-[767px]:bg-[#efeeec]
-          max-[767px]:px-[22px]
+          max-[767px]:px-5.5
           max-[767px]:text-[11px]
           max-[767px]:text-[#464553]
         "
@@ -73,8 +73,8 @@ export function FilterTabs() {
         role="tab"
         aria-selected="false"
         className="
-          min-w-[110px]
-          h-[54px]
+          min-w-27.5
+          h-13.5
           px-6
           text-[13px]
           text-[#5f5e5b]
@@ -86,7 +86,7 @@ export function FilterTabs() {
           max-[767px]:rounded-full
           max-[767px]:border-0
           max-[767px]:bg-[#efeeec]
-          max-[767px]:px-[22px]
+          max-[767px]:px-5.5
           max-[767px]:text-[11px]
           max-[767px]:text-[#464553]
         "

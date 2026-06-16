@@ -20,7 +20,7 @@ const FilterBar = () => {
         border-y border-[#e5e4e1]
         py-5
 
-        md:sticky md:top-[100px] md:z-15
+        md:sticky md:top-25 md:z-15
         md:-mx-6 md:block
         md:border-t-0
         md:bg-[#faf9f7]/95

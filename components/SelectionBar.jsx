@@ -5,10 +5,10 @@ const SelectionBar = ({ count, onClear }) => {
     <aside
       aria-live="polite"
       className={`
-        fixed right-0 left-0 z-[30]
+        fixed right-0 left-0 z-30
         transition-all duration-200
 
-        bottom-[30px]
+        bottom-7.5
         pointer-events-none
         opacity-0
         translate-y-6
@@ -25,7 +25,7 @@ const SelectionBar = ({ count, onClear }) => {
       <div
         className="
           mx-auto
-          flex min-h-[73px]
+          flex min-h-18.25
           w-[min(842px,calc(100%-48px))]
           items-center justify-between
 
@@ -37,23 +37,23 @@ const SelectionBar = ({ count, onClear }) => {
           text-white
           shadow-[0_18px_38px_rgba(0,0,0,0.16)]
 
-          max-[767px]:min-h-[86px]
+          max-[767px]:min-h-21.5
           max-[767px]:w-full
           max-[767px]:rounded-none
           max-[767px]:border-0
-          max-[767px]:px-[30px]
-          max-[767px]:py-[14px]
+          max-[767px]:px-7.5
+          max-[767px]:py-3.5
           max-[767px]:shadow-none
         "
       >
         {/* Count */}
         <div
           className="
-            flex min-w-[220px] items-center gap-1.5 text-[17px]
+            flex min-w-55 items-center gap-1.5 text-[17px]
 
-            after:ml-[19px]
+            after:ml-4.75
             after:block
-            after:h-[31px]
+            after:h-7.75
             after:w-px
             after:bg-white/20
             after:content-['']
@@ -93,9 +93,9 @@ const SelectionBar = ({ count, onClear }) => {
         {/* Actions */}
         <div
           className="
-            flex items-center gap-[23px]
+            flex items-center gap-5.75
 
-            max-[767px]:gap-[31px]
+            max-[767px]:gap-7.75
           "
         >
           <button

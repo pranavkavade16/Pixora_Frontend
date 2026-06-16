@@ -61,13 +61,11 @@ const mobileAlbums = [
 function LibraryPage() {
   return (
     <div className="min-h-screen bg-[#faf9f7]">
-      <DashboardNav />
-
       <main
         className="
         px-4
-        pt-[42px]
-        pb-[68px]
+        pt-10.5
+        pb-17
 
         max-[767px]:px-[13px]
         max-[767px]:pt-[31px]

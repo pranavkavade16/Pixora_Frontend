@@ -38,7 +38,7 @@ const PhotoGrid = ({
 
           max-[767px]:grid
           max-[767px]:grid-cols-2
-          max-[767px]:gap-[13px]
+          max-[767px]:gap-3.25
         "
       >
         {mobilePhotos.slice(0, 4).map((photo, index) => (

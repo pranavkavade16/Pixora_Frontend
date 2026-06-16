@@ -113,17 +113,17 @@ const AlbumDetails = () => {
       <main
         className="
         px-8
-        pt-[69px]
+        pt-17.25
         pb-40
 
         max-[1100px]:px-5
 
-        max-[767px]:px-[25px]
-        max-[767px]:pt-[100px]
-        max-[767px]:pb-[190px]
+        max-[767px]:px-6.25
+        max-[767px]:pt-25
+        max-[767px]:pb-47.5
 
         max-[520px]:px-4
-        max-[520px]:pb-[180px]
+        max-[520px]:pb-45
       "
       >
         <AlbumHeader />
@@ -140,8 +140,8 @@ const AlbumDetails = () => {
         <button
           type="button"
           className="
-          mx-auto mt-[61px]
-          flex h-[63px] w-[300px]
+          mx-auto mt-15.25
+          flex h-15.75 w-75
           items-center justify-center gap-3
 
           rounded-lg

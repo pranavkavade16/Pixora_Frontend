@@ -10,6 +10,7 @@ import LibraryPage from "../pages/LibraryPage";
 import TopNav from "../components/TopNav";
 import { DashboardNav } from "../components/DashboardNav";
 import CreateAlbumModal from "../components/CreateAlbumModal";
+import PhotoDetailPage from "../pages/PhotoDetails";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LibraryPage />} />
           <Route path={"/albumDetails"} element={<AlbumDetails />} />
+          <Route path="/photoDetails" element={<PhotoDetailPage />} />
         </Routes>
       </BrowserRouter>
     </AlbumProvider>
