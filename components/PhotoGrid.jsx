@@ -1,4 +1,5 @@
 import PhotoCard from "./PhotoCard";
+
 const PhotoGrid = ({
   photos: desktopPhotos,
   mobilePhotos,
@@ -7,9 +8,17 @@ const PhotoGrid = ({
 }) => {
   return (
     <>
+      {/* Desktop / Tablet Grid */}
       <section
-        className="photo-grid desktop-grid"
         aria-label="Summer 2026 photo grid"
+        className="
+          grid
+          grid-cols-4
+          gap-4.5
+
+          max-[1100px]:grid-cols-3
+          max-[767px]:hidden
+        "
       >
         {desktopPhotos.map((photo) => (
           <PhotoCard
@@ -20,9 +29,17 @@ const PhotoGrid = ({
           />
         ))}
       </section>
+
+      {/* Mobile Grid */}
       <section
-        className="photo-grid mobile-grid"
         aria-label="Ethereal Coastlines photo grid"
+        className="
+          hidden
+
+          max-[767px]:grid
+          max-[767px]:grid-cols-2
+          max-[767px]:gap-[13px]
+        "
       >
         {mobilePhotos.slice(0, 4).map((photo, index) => (
           <PhotoCard

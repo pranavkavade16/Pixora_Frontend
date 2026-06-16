@@ -109,21 +109,57 @@ const AlbumDetails = () => {
   const clearSelection = () => setSelected(new Set());
 
   return (
-    <div className="kp-app">
-      <main className="kp-main">
+    <div className="min-h-screen bg-[#faf9f7]">
+      <main
+        className="
+        px-8
+        pt-[69px]
+        pb-40
+
+        max-[1100px]:px-5
+
+        max-[767px]:px-[25px]
+        max-[767px]:pt-[100px]
+        max-[767px]:pb-[190px]
+
+        max-[520px]:px-4
+        max-[520px]:pb-[180px]
+      "
+      >
         <AlbumHeader />
+
         <FilterBar />
+
         <PhotoGrid
           photos={photos}
           mobilePhotos={mobilePhotos}
           selected={selected}
           onToggle={toggleSelected}
         />
-        <button className="view-all" type="button">
-          View All 240 Photos <ChevronDown size={20} />
+
+        <button
+          type="button"
+          className="
+          mx-auto mt-[61px]
+          flex h-[63px] w-[300px]
+          items-center justify-center gap-3
+
+          rounded-lg
+          border border-[#e5e4e1]
+
+          text-[17px]
+          text-[#5f5e5b]
+
+          max-[767px]:hidden
+        "
+        >
+          View All 240 Photos
+          <ChevronDown size={20} />
         </button>
       </main>
+
       <SelectionBar count={selectedCount} onClear={clearSelection} />
+
       <MobileNav hidden={selectedCount > 0} />
     </div>
   );

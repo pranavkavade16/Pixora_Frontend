@@ -60,30 +60,111 @@ const mobileAlbums = [
 
 function LibraryPage() {
   return (
-    <div className="dashboard-page">
-      <main className="dashboard-main">
-        <section className="dashboard-header">
-          <h1>My Library</h1>
-          <label className="library-search">
-            <Search size={22} />
-            <input type="search" placeholder="Search your library..." />
+    <div className="min-h-screen bg-[#faf9f7]">
+      <DashboardNav />
+
+      <main
+        className="
+        px-4
+        pt-[42px]
+        pb-[68px]
+
+        max-[767px]:px-[13px]
+        max-[767px]:pt-[31px]
+        max-[767px]:pb-[98px]
+      "
+      >
+        <section
+          className="
+          mb-10
+          grid gap-7
+
+          max-[767px]:mb-[30px]
+          max-[767px]:gap-[26px]
+        "
+        >
+          <h1
+            className="
+            text-[40px]
+            font-bold
+            leading-[1.15]
+            tracking-[-0.04em]
+
+            max-[767px]:text-2xl
+            max-[767px]:font-medium
+            max-[767px]:tracking-[-0.03em]
+          "
+          >
+            My Library
+          </h1>
+
+          <label
+            className="
+            relative flex h-[51px] items-center
+            rounded-lg
+            border border-[#e5e4e1]
+            bg-white
+            text-[#464553]
+
+            max-[767px]:hidden
+          "
+          >
+            <Search size={22} className="absolute left-[18px]" />
+
+            <input
+              type="search"
+              placeholder="Search your library..."
+              className="
+              h-full w-full
+              bg-transparent
+              pl-12 pr-[18px]
+
+              text-[15px]
+              text-[#111110]
+
+              outline-none
+              placeholder:text-[#2f3130]
+            "
+            />
           </label>
+
           <FilterTabs />
         </section>
+
+        {/* Desktop Albums */}
         <section
-          className="album-grid dashboard-desktop-albums"
           aria-label="Albums"
+          className="
+          grid
+          grid-cols-3
+          gap-8
+
+          max-[1100px]:grid-cols-2
+          max-[767px]:hidden
+        "
         >
           {desktopAlbums.map((album) => (
-            <AlbumCard album={album} key={album.title} variant="desktop" />
+            <AlbumCard key={album.title} album={album} variant="desktop" />
           ))}
         </section>
-        <section className="dashboard-mobile-albums" aria-label="Albums">
+
+        {/* Mobile Albums */}
+        <section
+          aria-label="Albums"
+          className="
+          hidden
+
+          max-[767px]:flex
+          max-[767px]:flex-col
+          max-[767px]:gap-[33px]
+        "
+        >
           {mobileAlbums.map((album) => (
-            <AlbumCard album={album} key={album.title} variant="mobile" />
+            <AlbumCard key={album.title} album={album} variant="mobile" />
           ))}
         </section>
       </main>
+
       <MobileBottomNav />
     </div>
   );

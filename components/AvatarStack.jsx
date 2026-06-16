@@ -7,13 +7,33 @@ const AvatarStack = () => {
 
   return (
     <div
-      className="avatar-stack desktop-avatars"
+      className="hidden items-center md:flex"
       aria-label="Shared with 5 people"
     >
       {avatars.map((avatar, index) => (
-        <img key={avatar} src={avatar} alt={`Collaborator ${index + 1}`} />
+        <img
+          key={avatar}
+          src={avatar}
+          alt={`Collaborator ${index + 1}`}
+          className={`
+            h-10 w-10 rounded-full object-cover
+            border-2 border-[#faf9f7]
+            ${index !== 0 ? "-ml-3" : ""}
+          `}
+        />
       ))}
-      <span>+2</span>
+
+      <span
+        className="
+          -ml-3 flex h-10 w-10 items-center justify-center
+          rounded-full
+          border-2 border-[#faf9f7]
+          bg-[#e9e8e6]
+          text-sm text-[#6b6a67]
+        "
+      >
+        +2
+      </span>
     </div>
   );
 };
