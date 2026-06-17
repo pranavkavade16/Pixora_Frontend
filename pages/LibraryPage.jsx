@@ -3,6 +3,7 @@ import { FilterTabs } from "../components/FilterTabs";
 import { AlbumCard } from "../components/AlbumCard";
 import { MobileBottomNav } from "../components/MobileBottomNav";
 import { Search } from "lucide-react";
+import useFetch from "../customHooks/useFetch";
 
 const desktopAlbums = [
   {
@@ -59,6 +60,11 @@ const mobileAlbums = [
 ];
 
 function LibraryPage() {
+  const { data, loading, error } = useFetch(
+    "https://pixora-backend-roan.vercel.app/albums/6a31773c0dc54daa4bd9902e",
+  );
+
+
   return (
     <div className="min-h-screen bg-[#faf9f7]">
       <main

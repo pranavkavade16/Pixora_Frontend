@@ -60,7 +60,7 @@ export default function PhotoMobileDetails({
                 text-[52px]
                 font-medium
                 leading-[0.92]
-                tracking-[-0.05em]
+                tracking-tighter
                 text-[#111110]
               "
             >

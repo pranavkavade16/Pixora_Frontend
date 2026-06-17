@@ -62,7 +62,7 @@ export default function PhotoDesktopDetails({
         className="
           mx-auto
           grid
-          max-w-[1400px]
+          max-w-350
           grid-cols-12
           gap-10
 
@@ -193,7 +193,7 @@ export default function PhotoDesktopDetails({
                 onChange={(e) => setNewTag(e.target.value)}
                 placeholder="Add tag"
                 className="
-                  h-10 w-[220px]
+                  h-10 w-55
                   rounded-xl border border-[#e5e4e1]
                   px-3
                   text-sm
@@ -280,7 +280,7 @@ export default function PhotoDesktopDetails({
           <div
             className="
               mt-6
-              max-h-[260px]
+              max-h-65
               overflow-y-auto
               space-y-5
             "
