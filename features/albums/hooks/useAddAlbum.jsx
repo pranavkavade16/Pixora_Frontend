@@ -6,20 +6,27 @@ export const useAddAlbum = () => {
 
   const handleAddAlbum = async (albumData) => {
     if (!albumData.name?.trim()) {
-      throw new Error("Name is required.");
+      throw new Error("Album name is required.");
     }
 
     try {
       setLoading(true);
 
-      const response = await axios.post(
+      const { data } = await axios.post(
         "https://pixora-backend-roan.vercel.app/albums",
         albumData,
       );
-      console.log("Uploading");
 
-      return response.data;
       console.log("Album created successfully.");
+
+      return data;
+    } catch (error) {
+      console.error("Error creating album:", error);
+
+      throw (
+        error.response?.data ||
+        new Error("Something went wrong while creating the album.")
+      );
     } finally {
       setLoading(false);
     }

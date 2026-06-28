@@ -17,7 +17,6 @@ function CreateAlbumModal({ onClose, onCreate }) {
 
   const submitAlbum = (event) => {
     event.preventDefault();
-    console.log("Clicked");
 
     handleAddAlbum?.({
       name: albumName.trim(),
