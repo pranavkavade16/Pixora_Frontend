@@ -22,7 +22,7 @@ function App() {
         <UploadPhotoModal />
         <Routes>
           <Route path="/" element={<LibraryPage />} />
-          <Route path={"/albumDetails"} element={<AlbumDetails />} />
+          <Route path="/albumDetails/:albumId" element={<AlbumDetails />} />
           <Route path="/photoDetails" element={<PhotoDetailPage />} />
         </Routes>
       </BrowserRouter>

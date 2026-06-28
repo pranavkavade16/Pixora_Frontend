@@ -3,6 +3,7 @@ import { FilterTabs } from "../components/FilterTabs";
 import { AlbumCard } from "../components/AlbumCard";
 import { MobileBottomNav } from "../components/MobileBottomNav";
 import { Search } from "lucide-react";
+import { Link } from "react-router-dom";
 import useFetch from "../customHooks/useFetch";
 
 const desktopAlbums = [
@@ -64,6 +65,7 @@ function LibraryPage() {
     "https://pixora-backend-roan.vercel.app/albums/6a31773c0dc54daa4bd9902e",
   );
 
+  console.log(data);
 
   return (
     <div className="min-h-screen bg-[#faf9f7]">
@@ -147,8 +149,10 @@ function LibraryPage() {
           max-[767px]:hidden
         "
         >
-          {desktopAlbums.map((album) => (
-            <AlbumCard key={album.title} album={album} variant="desktop" />
+          {data?.data.map((album) => (
+            <Link to={`/albumDetails/${album._id}`}>
+              <AlbumCard key={album.title} album={album} variant="desktop" />
+            </Link>
           ))}
         </section>
 

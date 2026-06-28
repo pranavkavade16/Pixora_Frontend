@@ -6,6 +6,7 @@ import PhotoCard from "../components/PhotoCard";
 import PhotoGrid from "../components/PhotoGrid";
 import SelectionBar from "../components/SelectionBar";
 import TopNav from "../components/TopNav";
+import { useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import {
   ArrowDownToLine,
@@ -22,7 +23,7 @@ import {
   X,
 } from "lucide-react";
 import { ChevronDown } from "lucide-react";
-
+import useFetch from "../customHooks/useFetch";
 
 const avatars = [
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBjaEkMEF1luzMZHgnKbdBcQdXtw_hEdHljWw3EXYvhON8rPH5ef1eI1FPER_4eqNMD_camN5uveGJ9yM5rKWXbo0z_qfRbr9-1DMmlc-332iPBEZIQgulH8-_Cp794ETBPS1JBCMRw51Zjhp5mnAVedASnHFjBkr0NgpAK0bbjr2IoWD68oQc_UdpQKR66acqqxaZ1ZYTFaB4FQTtLkZFrhnNEKQNUv_DWkC2v0YrWeDYJRcNY_gCUlCSIE3A5L7O1PMecyNXkjmEz",
@@ -88,6 +89,13 @@ const AlbumDetails = () => {
   const [selected, setSelected] = useState(
     new Set([1, 2, 3, 4, 5, 6, 7, 8, 101, 102, 103, 104]),
   );
+
+  const { albumId } = useParams();
+  const { data, loading, error } = useFetch(
+    `https://pixora-backend-roan.vercel.app/albums/${albumId}/images`,
+  );
+
+  console.log("Album photos", data);
 
   const selectedCount = selected.size;
 

@@ -74,9 +74,7 @@ function AlbumMosaic({ album }) {
         "
       >
         <Camera size={50} />
-        <span className="text-[13px] text-[#464553]">
-          Start new collection
-        </span>
+        <span className="text-[13px] text-[#464553]">Start new collection</span>
       </div>
     );
   }
@@ -136,7 +134,7 @@ function AlbumMosaic({ album }) {
           >
             <ImageIcon size={24} />
           </div>
-        )
+        ),
       )}
     </div>
   );
