@@ -6,7 +6,8 @@ import {
   Share2,
 } from "lucide-react";
 
-export function AlbumCard({ album, variant = "desktop" }) {
+export function AlbumCard({ album, variant = "desktop", images }) {
+  console.log(album);
   return (
     <article
       className={`
@@ -24,7 +25,7 @@ export function AlbumCard({ album, variant = "desktop" }) {
       <div className="p-3 pb-3.5">
         <div className="flex items-start justify-between gap-4">
           <h2 className="truncate text-base font-medium leading-[1.35] text-[#111110]">
-            {album.title}
+            {album.name}
           </h2>
 
           <button
@@ -90,14 +91,14 @@ function AlbumMosaic({ album }) {
         m-1
       "
     >
-      {album.images.map((src, index) =>
-        src ? (
+      {album?.previewImages?.map((image, index) =>
+        image ? (
           <div
             key={`${album.title}-${index}`}
             className="relative overflow-hidden bg-[#f4f3f1]"
           >
             <img
-              src={src}
+              src={image.imageUrl}
               alt={`${album.title} preview ${index + 1}`}
               loading="lazy"
               className="
