@@ -95,8 +95,6 @@ const AlbumDetails = () => {
     `https://pixora-backend-roan.vercel.app/albums/${albumId}/images`,
   );
 
-  console.log("Album photos", data);
-
   const selectedCount = selected.size;
 
   const mobilePhotos = useMemo(
