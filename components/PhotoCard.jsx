@@ -1,12 +1,13 @@
 import { Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PhotoCard = ({ photo, selected, onToggle }) => {
-  console.log("Photo", photo);
+  console.log("PhotoCard", photo);
   return (
-    <button
-      type="button"
-      onClick={() => onToggle(photo._id)}
-      aria-pressed={selected}
+    <Link
+      to={`/photoDetails/${photo._id}`}
+      // onClick={() => onToggle(photo._id)}
+      // aria-pressed={selected}
       className={`
         group relative aspect-4/3
         overflow-hidden rounded-md
@@ -16,10 +17,11 @@ const PhotoCard = ({ photo, selected, onToggle }) => {
 
         active:scale-[0.985]
 
-        ${selected ? "" : ""}
+        // ${selected ? "" : ""}
       `}
     >
       {/* Image */}
+
       <img
         src={photo.imageUrl}
         alt={photo.title}
@@ -94,7 +96,7 @@ const PhotoCard = ({ photo, selected, onToggle }) => {
       >
         <Star size={20} fill={photo.favorite ? "currentColor" : "none"} />
       </span>
-    </button>
+    </Link>
   );
 };
 

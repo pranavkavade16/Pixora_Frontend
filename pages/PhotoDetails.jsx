@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import useFetch from "../customHooks/useFetch";
 
 import PhotoViewer from "../components/PhotoViewer";
 import PhotoDesktopDetails from "../components/PhotoDesktopDetails";
@@ -43,8 +44,15 @@ const SAMPLE_PHOTO = {
 };
 
 export default function PhotoDetailPage() {
-  const { id } = useParams();
+  const { imageId } = useParams();
 
+  const {
+    data: imageData,
+    loading: imageLoading,
+    error: imageError,
+  } = useFetch(`https://pixora-backend-roan.vercel.app/image/${imageId}`);
+
+  console.log(imageData);
   const [favorite, setFavorite] = useState(false);
   const [tags, setTags] = useState(SAMPLE_PHOTO.tags);
   const [comments, setComments] = useState(SAMPLE_PHOTO.comments);
@@ -52,9 +60,9 @@ export default function PhotoDetailPage() {
   const photo = useMemo(
     () => ({
       ...SAMPLE_PHOTO,
-      id,
+      imageId,
     }),
-    [id],
+    [imageId],
   );
 
   const removeTag = (tag) => {
@@ -90,7 +98,7 @@ export default function PhotoDetailPage() {
       {/* =======================================================
           IMAGE VIEWER
       ======================================================= */}
-      <PhotoViewer image={photo.image} title={photo.title} />
+      <PhotoViewer image={imageData?.data?.imageUrl} title={photo.title} />
 
       {/* =======================================================
           MOBILE DETAILS

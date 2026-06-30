@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LibraryPage />} />
           <Route path="/albumDetails/:albumId" element={<AlbumDetails />} />
-          <Route path="/photoDetails" element={<PhotoDetailPage />} />
+          <Route path="/photoDetails/:imageId" element={<PhotoDetailPage />} />
         </Routes>
       </BrowserRouter>
     </AlbumProvider>
