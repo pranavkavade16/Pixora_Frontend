@@ -2,7 +2,7 @@ import { ArrowLeft, Share2, Upload } from "lucide-react";
 import AvatarStack from "./AvatarStack";
 import useAlbumContext from "../context/AlbumContext";
 
-const AlbumHeader = () => {
+const AlbumHeader = ({ albumData }) => {
   const avatars = [
     "https://lh3.googleusercontent.com/aida-public/AB6AXuBjaEkMEF1luzMZHgnKbdBcQdXtw_hEdHljWw3EXYvhON8rPH5ef1eI1FPER_4eqNMD_camN5uveGJ9yM5rKWXbo0z_qfRbr9-1DMmlc-332iPBEZIQgulH8-_Cp794ETBPS1JBCMRw51Zjhp5mnAVedASnHFjBkr0NgpAK0bbjr2IoWD68oQc_UdpQKR66acqqxaZ1ZYTFaB4FQTtLkZFrhnNEKQNUv_DWkC2v0YrWeDYJRcNY_gCUlCSIE3A5L7O1PMecyNXkjmEz",
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCoguH498JHyB_Vsob_OE-5nGDc76o2Q8Vr-2JnizuFE7cgRDtmdi8MOtTq8dKcZV8TtrEK4DO2NDvZU0s7s5V1eCUvlL2zlo23-G2Rq-VQTdoLgvg4npoiltCWmQDZBn_pcYCtBvqv0HeKOtS0wj-fEM5g_YvKjAe10zP0FKW-tj4rmKolSHgofiEvnTf07sTKQa0wM7HqM7iLxqK1vpjGG_cIVNqq7l9TXFe2_9p0Yn6YgHx_3D6Mw9b5wDJbcb0jUVdgTKDRyF1u",
@@ -10,6 +10,18 @@ const AlbumHeader = () => {
   ];
 
   const { openUploadPhoto } = useAlbumContext();
+
+  const createdAt = "2026-06-27T13:24:16.949Z";
+
+  const date = new Date(createdAt);
+
+  const formatted = `CREATED ${date
+    .toLocaleString("en-US", { month: "long" })
+    .toUpperCase()} ${date.getFullYear()}`;
+
+  console.log(formatted);
+
+  console.log(albumData);
   return (
     <section className="mb-12 grid gap-8">
       {/* Top Row */}
@@ -23,7 +35,7 @@ const AlbumHeader = () => {
           </button>
 
           <h2 className="text-4xl font-bold tracking-[-0.04em] lg:text-[42px]">
-            Summer 2026
+            {albumData?.name}
           </h2>
         </div>
 
@@ -69,16 +81,12 @@ const AlbumHeader = () => {
         <div className="max-w-177.5">
           {/* Desktop Copy */}
           <p className="hidden text-[17px] leading-relaxed text-[#5f5e5b] md:block">
-            A curated collection of memories from the coastal tour, featuring
-            architectural studies and candid beach moments during the golden
-            hours of July.
+            {albumData.description}
           </p>
 
           {/* Mobile Copy */}
           <p className="text-xl leading-relaxed text-[#63615e] md:hidden">
-            A curated collection of long-exposure seascapes captured during the
-            blue hour in Northern Iceland. Exploring the silent tension between
-            ancient basalt pillars and the relentless Atlantic tide.
+            {albumData.description}
           </p>
 
           {/* Desktop Stats */}

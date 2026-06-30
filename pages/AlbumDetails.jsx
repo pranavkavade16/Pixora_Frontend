@@ -91,9 +91,29 @@ const AlbumDetails = () => {
   );
 
   const { albumId } = useParams();
-  const { data, loading, error } = useFetch(
+
+  console.log("AlbumId ", albumId);
+  const {
+    data: imagesData,
+    loading: imagesLoading,
+    error: imagesError,
+  } = useFetch(
     `https://pixora-backend-roan.vercel.app/albums/${albumId}/images`,
   );
+
+  console.log("Images data", imagesData);
+
+  const {
+    data: albumData,
+    loading: albumLoading,
+    error: albumError,
+  } = useFetch(`https://pixora-backend-roan.vercel.app/albums/${albumId}`);
+  const albumUrl = `https://pixora-backend-roan.vercel.app/albums/${albumId}`;
+  const imagesUrl = `https://pixora-backend-roan.vercel.app/albums/${albumId}/images`;
+  console.log(albumUrl);
+  console.log(imagesUrl);
+
+  console.log("albumData", albumData);
 
   const selectedCount = selected.size;
 
@@ -116,6 +136,14 @@ const AlbumDetails = () => {
 
   const clearSelection = () => setSelected(new Set());
 
+  if (albumLoading || imagesLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (albumError || imagesError) {
+    return <div>Something went wrong.</div>;
+  }
+
   return (
     <div className="min-h-screen bg-[#faf9f7]">
       <main
@@ -134,13 +162,13 @@ const AlbumDetails = () => {
         max-[520px]:pb-45
       "
       >
-        <AlbumHeader />
+        <AlbumHeader albumData={albumData?.data} />
 
         <FilterBar />
 
         <PhotoGrid
-          photos={photos}
-          mobilePhotos={mobilePhotos}
+          photos={imagesData?.data}
+          mobilePhotos={imagesData?.data}
           selected={selected}
           onToggle={toggleSelected}
         />

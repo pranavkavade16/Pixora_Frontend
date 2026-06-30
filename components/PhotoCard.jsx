@@ -1,10 +1,11 @@
 import { Star } from "lucide-react";
 
 const PhotoCard = ({ photo, selected, onToggle }) => {
+  console.log("Photo", photo);
   return (
     <button
       type="button"
-      onClick={() => onToggle(photo.id)}
+      onClick={() => onToggle(photo._id)}
       aria-pressed={selected}
       className={`
         group relative aspect-4/3
@@ -20,7 +21,7 @@ const PhotoCard = ({ photo, selected, onToggle }) => {
     >
       {/* Image */}
       <img
-        src={photo.src}
+        src={photo.imageUrl}
         alt={photo.title}
         loading="lazy"
         className="
