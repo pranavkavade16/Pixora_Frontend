@@ -52,7 +52,10 @@ export default function PhotoDetailPage() {
     error: imageError,
   } = useFetch(`https://pixora-backend-roan.vercel.app/image/${imageId}`);
 
-  console.log(imageData);
+  console.log(`https://pixora-backend-roan.vercel.app/image/${imageId}`);
+
+  console.log(imageId);
+  console.log("photo details page", imageData);
   const [favorite, setFavorite] = useState(false);
   const [tags, setTags] = useState(SAMPLE_PHOTO.tags);
   const [comments, setComments] = useState(SAMPLE_PHOTO.comments);
@@ -93,6 +96,13 @@ export default function PhotoDetailPage() {
     setComments((current) => [newComment, ...current]);
   };
 
+  if (imageLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (imageError) {
+    return <div>Something went wrong.</div>;
+  }
   return (
     <main className="fixed inset-0 flex h-screen flex-col overflow-hidden bg-[#faf9f7]">
       {/* =======================================================
@@ -105,7 +115,7 @@ export default function PhotoDetailPage() {
       ======================================================= */}
       <div className="flex-1 overflow-hidden lg:hidden">
         <PhotoMobileDetails
-          photo={photo}
+          photo={imageData?.data}
           favorite={favorite}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
           tags={tags}

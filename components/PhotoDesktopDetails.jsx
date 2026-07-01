@@ -14,6 +14,8 @@ export default function PhotoDesktopDetails({
   const [newTag, setNewTag] = useState("");
   const [comment, setComment] = useState("");
 
+  console.log("photo desktop details component", photo);
+
   const metadata = [
     {
       label: "ISO",
@@ -86,7 +88,7 @@ export default function PhotoDesktopDetails({
                   text-[#111110]
                 "
               >
-                {photo.title}
+                {photo.name}
               </h1>
 
               <p

@@ -16,19 +16,19 @@ export default function PhotoMobileDetails({
   const metadata = [
     {
       label: "ISO",
-      value: photo.metadata.iso,
+      value: "100",
     },
     {
       label: "Aperture",
-      value: photo.metadata.aperture,
+      value: "f/2.8",
     },
     {
       label: "Shutter",
-      value: photo.metadata.shutter,
+      value: "1/250s",
     },
     {
       label: "Camera",
-      value: photo.metadata.camera,
+      value: "Sony A7R IV",
     },
   ];
 
