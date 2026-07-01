@@ -6,6 +6,7 @@ import PhotoCard from "../components/PhotoCard";
 import PhotoGrid from "../components/PhotoGrid";
 import SelectionBar from "../components/SelectionBar";
 import TopNav from "../components/TopNav";
+import ShareAlbumModal from "../components/ShareAlbumModal";
 import { useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import {
@@ -89,6 +90,8 @@ const AlbumDetails = () => {
   const [selected, setSelected] = useState(
     new Set([1, 2, 3, 4, 5, 6, 7, 8, 101, 102, 103, 104]),
   );
+
+  
 
   const { albumId } = useParams();
 

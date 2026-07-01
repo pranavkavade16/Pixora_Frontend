@@ -12,6 +12,7 @@ import { DashboardNav } from "../components/DashboardNav";
 import CreateAlbumModal from "../components/CreateAlbumModal";
 import PhotoDetailPage from "../pages/PhotoDetails";
 import UploadPhotoModal from "../components/UploadPhotoModal";
+import ShareAlbumModal from "../components/ShareAlbumModal";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <DashboardNav />
         <CreateAlbumModal />
         <UploadPhotoModal />
+        <ShareAlbumModal />
         <Routes>
           <Route path="/" element={<LibraryPage />} />
           <Route path="/albumDetails/:albumId" element={<AlbumDetails />} />

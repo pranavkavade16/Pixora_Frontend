@@ -9,7 +9,7 @@ const AlbumHeader = ({ albumData }) => {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuArsqheeSwjQ5_zIkzusbJ-5FeTLJIXZhE38WSow8EgGaaviwLHyd4nwLGPpaAu0j05v82r43fVQltnrkgmO3RchcijZ0PeXzyIM4Zk77luj9oZQHqdZouLtSnKPL0Gef2HSzul8ROB7X04O6oy_aJ4413nc15u-R8G-a043ckWet4fSyaHrehZl63RdiG5e0nFRDbtBkarslnXw1ZWqWcScaaJgW8-CgOvGqVIkC3Hx7dQaknrH5PF7tphZYpBUKkdY-tNo_O2airc",
   ];
 
-  const { openUploadPhoto } = useAlbumContext();
+  const { openUploadPhoto, openShareAlbum } = useAlbumContext();
 
   const createdAt = "2026-06-27T13:24:16.949Z";
 
@@ -42,6 +42,7 @@ const AlbumHeader = ({ albumData }) => {
         <div className="grid grid-cols-2 gap-4.5 md:flex md:gap-3">
           <button
             type="button"
+            onClick={openShareAlbum}
             className="
               inline-flex items-center justify-center gap-2
               h-14 md:h-11
