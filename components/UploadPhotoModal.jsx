@@ -88,20 +88,38 @@ const UploadPhotoModal = () => {
   const removePerson = (person) => {
     setPersons((prev) => prev.filter((p) => p !== person));
   };
-  const onSubmit = (e) => {
+
+  const resetForm = () => {
+    setPersonInput("");
+    setPersons([]);
+    setImage(null);
+    setName("");
+    setTagInput("");
+    setTags([]);
+    setIsFavorite(false);
+    setUploadProgress(0);
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    handleAddImage(
-      {
-        userId: "6a31773c0dc54daa4bd9902e",
-        image,
-        name,
-        tags,
-        persons,
-        isFavorite,
-      },
-      selectedAlbumId,
-    );
+    try {
+      await handleAddImage(
+        {
+          userId: "6a31773c0dc54daa4bd9902e",
+          image,
+          name,
+          tags,
+          persons,
+          isFavorite,
+        },
+        selectedAlbumId,
+      );
+
+      resetForm();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
