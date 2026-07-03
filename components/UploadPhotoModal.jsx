@@ -14,6 +14,7 @@ const UploadPhotoModal = () => {
   const [tagInput, setTagInput] = useState("");
   const [tags, setTags] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   if (!isUploadPhotoOpen) return null;
 
@@ -37,6 +38,36 @@ const UploadPhotoModal = () => {
     setTagInput("");
   };
 
+  const formatFileSize = (bytes) => {
+    if (!bytes) return "";
+
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+
+    return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
+  };
+
+  const handleImageSelect = (e) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    setImage(file);
+
+    // preview state before upload
+    setUploadProgress(0);
+
+    let progress = 0;
+
+    const interval = setInterval(() => {
+      progress += 10;
+      setUploadProgress(progress);
+
+      if (progress >= 100) {
+        clearInterval(interval);
+      }
+    }, 50);
+  };
   const addPerson = (e) => {
     if (e.key !== "Enter") return;
 
@@ -93,32 +124,69 @@ const UploadPhotoModal = () => {
         >
           <div className="space-y-6">
             {/* DROPZONE */}
+            {!image ? (
+              <label className="flex min-h-70 cursor-pointer flex-col items-center justify-center rounded-[20px] border-2 border-dashed border-[#c7c4d6] px-6 text-center hover:bg-[#fafaff]">
+                <input
+                  hidden
+                  type="file"
+                  accept=".png,.jpg,.jpeg,.webp"
+                  onChange={handleImageSelect}
+                />
 
-            <label className="flex min-h-70 cursor-pointer flex-col items-center justify-center rounded-[20px] border-2 border-dashed border-[#c7c4d6] px-6 text-center hover:bg-[#fafaff]">
-              <input
-                type="file"
-                hidden
-                accept=".png,.jpg,.jpeg,.webp"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
+                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#e2dfff]">
+                  <ImagePlus size={34} className="text-[#4241bc]" />
+                </div>
 
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#e2dfff]">
-                <ImagePlus size={34} className="text-[#4241bc]" />
+                <h3 className="text-[20px] font-semibold">
+                  Drag and drop your photo here
+                </h3>
+
+                <p className="mt-2 text-[18px] text-[#666]">
+                  PNG, JPG, or WEBP up to 20MB
+                </p>
+
+                <span className="mt-8 rounded-xl border border-[#ddd] px-8 py-3 text-[18px]">
+                  Browse files
+                </span>
+              </label>
+            ) : (
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 rounded-2xl border border-[#E5E4E1] bg-[#F8F8F8] p-4">
+                  <img
+                    src={URL.createObjectURL(image)}
+                    alt="preview"
+                    className="h-18 w-18 rounded-xl object-cover"
+                  />
+
+                  <div className="min-w-0 flex-1">
+                    <h4 className="truncate text-xl">{image.name}</h4>
+
+                    <p className="mt-1 text-lg text-[#666]">
+                      {formatFileSize(image.size)}
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setImage(null);
+                      setUploadProgress(0);
+                    }}
+                  >
+                    <X size={28} />
+                  </button>
+                </div>
+
+                <div className="h-1.5 overflow-hidden rounded-full bg-[#E5E5E5]">
+                  <div
+                    className="h-full rounded-full bg-[#4241BC] transition-all duration-300"
+                    style={{
+                      width: `${uploadProgress}%`,
+                    }}
+                  />
+                </div>
               </div>
-
-              <h3 className="text-[20px] font-semibold">
-                Drag and drop your photo here
-              </h3>
-
-              <p className="mt-2 text-[18px] text-[#666]">
-                PNG, JPG, or WEBP up to 20MB
-              </p>
-
-              <span className="mt-8 rounded-xl border border-[#ddd] px-8 py-3 text-[18px]">
-                Browse files
-              </span>
-            </label>
-
+            )}
             <div className="space-y-2">
               <label className="block text-lg text-[#464553]">Photo Name</label>
 
@@ -130,9 +198,7 @@ const UploadPhotoModal = () => {
                 className="h-14 w-full rounded-xl border border-[#e5e4e1] px-4 outline-none focus:border-[#4241bc]"
               />
             </div>
-
             {/* TAGS */}
-
             <div>
               <label className="mb-2 block text-lg">Tags</label>
 
@@ -160,7 +226,6 @@ const UploadPhotoModal = () => {
               </div>
             </div>
             {/* PERSONS */}
-
             <div>
               <label className="mb-2 block text-lg">Person Names</label>
 
@@ -194,9 +259,7 @@ const UploadPhotoModal = () => {
                 />
               </div>
             </div>
-
             {/* FAVORITE */}
-
             <div className="flex items-center justify-between rounded-xl border border-[#ddd] bg-[#f4f3f1] p-4">
               <div className="flex items-center gap-3">
                 <Star size={22} className="text-[#f59e0b]" />

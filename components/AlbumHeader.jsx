@@ -21,7 +21,7 @@ const AlbumHeader = ({ albumData }) => {
 
   console.log(formatted);
 
-  console.log(albumData);
+  console.log("AlbumHeader Data", albumData);
   return (
     <section className="mb-12 grid gap-8">
       {/* Top Row */}
