@@ -52,9 +52,6 @@ export default function PhotoDetailPage() {
     error: imageError,
   } = useFetch(`https://pixora-backend-roan.vercel.app/image/${imageId}`);
 
-  console.log(`https://pixora-backend-roan.vercel.app/image/${imageId}`);
-
-  console.log(imageId);
   console.log("photo details page", imageData);
   const [favorite, setFavorite] = useState(false);
   const [tags, setTags] = useState(SAMPLE_PHOTO.tags);
@@ -116,9 +113,9 @@ export default function PhotoDetailPage() {
       <div className="flex-1 overflow-hidden lg:hidden">
         <PhotoMobileDetails
           photo={imageData?.data}
-          favorite={favorite}
+          favorite={imageData?.isFavorite}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
-          tags={tags}
+          tags={imageData?.tags}
           onRemoveTag={removeTag}
           onAddTag={addTag}
         />
@@ -129,11 +126,11 @@ export default function PhotoDetailPage() {
       ======================================================= */}
       <div className="hidden flex-1 overflow-hidden lg:block">
         <PhotoDesktopDetails
-          photo={photo}
-          favorite={favorite}
+          photo={imageData?.data}
+          favorite={imageData?.isFavorite}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
-          tags={tags}
-          comments={comments}
+          tags={imageData?.tags}
+          comments={imageData?.comments}
           onRemoveTag={removeTag}
           onAddTag={addTag}
           onAddComment={addComment}

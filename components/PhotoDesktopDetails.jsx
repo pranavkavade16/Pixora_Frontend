@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Plus, Share2, Star, Trash2, Send, X } from "lucide-react";
+import { formatDate } from "../utils/formatDate";
 
 export default function PhotoDesktopDetails({
   photo,
@@ -14,24 +15,24 @@ export default function PhotoDesktopDetails({
   const [newTag, setNewTag] = useState("");
   const [comment, setComment] = useState("");
 
-  console.log("photo desktop details component", photo);
+  console.log("photo desktop details component", photo, photo.tags);
 
   const metadata = [
     {
       label: "ISO",
-      value: photo.metadata.iso,
+      value: "100",
     },
     {
       label: "Aperture",
-      value: photo.metadata.aperture,
+      value: "f/2.8",
     },
     {
       label: "Shutter",
-      value: photo.metadata.shutter,
+      value: "1/250s",
     },
     {
       label: "Camera",
-      value: photo.metadata.camera,
+      value: "Sony A7R IV",
     },
   ];
 
@@ -98,7 +99,7 @@ export default function PhotoDesktopDetails({
                   text-[#5f5e5b]
                 "
               >
-                Captured in {photo.location} • {photo.date}
+                Captured in unknow location • {formatDate(photo.createdAt)}
               </p>
             </div>
 
@@ -157,7 +158,7 @@ export default function PhotoDesktopDetails({
           {/* Tags */}
           <div className="mt-8">
             <div className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
+              {photo?.tags?.map((tag) => (
                 <div
                   key={tag}
                   className="
@@ -287,7 +288,7 @@ export default function PhotoDesktopDetails({
               space-y-5
             "
           >
-            {comments.map((comment) => (
+            {photo?.comments?.map((comment) => (
               <div key={comment.id} className="flex gap-3">
                 <div
                   className="

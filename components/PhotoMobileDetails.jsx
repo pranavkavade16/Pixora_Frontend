@@ -1,7 +1,6 @@
-// src/components/photo-detail/MobileDetails.jsx
-
 import { useState } from "react";
 import { Plus, Share2, Star, Trash2, X } from "lucide-react";
+import { formatDate } from "../utils/formatDate";
 
 export default function PhotoMobileDetails({
   photo,
@@ -79,9 +78,8 @@ export default function PhotoMobileDetails({
                 text-[#5f5e5b]
               "
             >
-              Captured in Kyoto,
-              <br />
-              Japan • Oct 12, 2023
+              Captured in unknown location,
+              <br />• {formatDate(photo.createdAt)}
             </p>
           </div>
 
@@ -145,7 +143,7 @@ export default function PhotoMobileDetails({
         ===================================== */}
         <div className="mt-10">
           <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => (
+            {photo?.tags?.map((tag) => (
               <div
                 key={tag}
                 className="
