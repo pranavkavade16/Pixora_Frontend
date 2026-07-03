@@ -4,7 +4,7 @@ import axios from "axios";
 export const useAddPhoto = () => {
   const [loading, setLoading] = useState(false);
 
-  const handleAddImage = async (photoData) => {
+  const handleAddImage = async (photoData, albumId) => {
     const formData = new FormData();
 
     formData.append("image", photoData.image);
@@ -18,7 +18,7 @@ export const useAddPhoto = () => {
       setLoading(true);
 
       const response = await axios.post(
-        "https://pixora-backend-roan.vercel.app/albums/6a3fcf00a3d4b926ddd4ed4b/images",
+        `https://pixora-backend-roan.vercel.app/albums/${albumId}/images`,
         formData,
       );
       console.log("Uploading");

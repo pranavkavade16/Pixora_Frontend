@@ -10,18 +10,18 @@ export function AlbumProvider({ children }) {
   const [isCreateAlbumOpen, setIsCreateAlbumOpen] = useState(false);
   const [isUploadPhotoOpen, setIsUploadPhotoOpen] = useState(false);
   const [isShareAlbumOpen, setIsShareAlbumOpen] = useState(false);
-  const [selectedAlbum, setSelectedAlbum] = useState(null);
+  const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
   const openCreateAlbum = () => setIsCreateAlbumOpen(true);
   const closeCreateAlbum = () => setIsCreateAlbumOpen(false);
 
   const openUploadPhoto = (albumId) => {
     setSelectedAlbumId(albumId);
-    setIsUploadModalOpen(true);
+    setIsUploadPhotoOpen(true);
   };
 
   const closeUploadPhoto = () => {
-    setIsUploadModalOpen(false);
+    setIsUploadPhotoOpen(false);
     setSelectedAlbumId(null);
   };
 
@@ -35,7 +35,7 @@ export function AlbumProvider({ children }) {
         closeCreateAlbum,
 
         isUploadPhotoOpen,
-        selectedAlbum,
+        selectedAlbumId,
         openUploadPhoto,
         closeUploadPhoto,
 

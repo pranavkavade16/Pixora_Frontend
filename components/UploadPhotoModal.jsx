@@ -4,7 +4,8 @@ import useAlbumContext from "../context/AlbumContext";
 import { useAddPhoto } from "../features/photos/hooks/useAddPhoto";
 
 const UploadPhotoModal = () => {
-  const { isUploadPhotoOpen, closeUploadPhoto } = useAlbumContext();
+  const { isUploadPhotoOpen, closeUploadPhoto, selectedAlbumId } =
+    useAlbumContext();
   const { handleAddImage, loading } = useAddPhoto();
 
   const [personInput, setPersonInput] = useState("");
@@ -90,17 +91,18 @@ const UploadPhotoModal = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    handleAddImage({
-      userId: "6a31773c0dc54daa4bd9902e",
-      image,
-      name,
-      tags,
-      persons,
-      isFavorite,
-    });
+    handleAddImage(
+      {
+        userId: "6a31773c0dc54daa4bd9902e",
+        image,
+        name,
+        tags,
+        persons,
+        isFavorite,
+      },
+      selectedAlbumId,
+    );
   };
-
-  console.log(image, name, tags, persons, isFavorite);
 
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">

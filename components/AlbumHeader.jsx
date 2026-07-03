@@ -69,7 +69,7 @@ const AlbumHeader = ({ albumData }) => {
               text-lg md:text-base
               text-white
             "
-            onClick={openUploadPhoto}
+            onClick={() => openUploadPhoto(albumData._id)}
           >
             <Upload size={21} />
             Upload
