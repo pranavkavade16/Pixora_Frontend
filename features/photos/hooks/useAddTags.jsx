@@ -3,13 +3,14 @@ import axios from "axios";
 const useAddTags = () => {
   const [loading, setLoading] = useState(false);
 
-  const handleAddTags = async (tags) => {
+  const handleAddTags = async (imageId, tags) => {
     setLoading(true);
 
     try {
-      const response = await axios.push(
-        `https://pixora-backend-roan.vercel.app/albums/${imageId}/comment`,
-        tags,
+      console.log("Hook", tags);
+      const response = await axios.patch(
+        `https://pixora-backend-roan.vercel.app/image/${imageId}/tags`,
+        { tags },
       );
 
       console.log("Uploading");
@@ -27,3 +28,5 @@ const useAddTags = () => {
 
   return { handleAddTags, loading };
 };
+
+export default useAddTags;

@@ -79,7 +79,7 @@ export default function PhotoMobileDetails({
               "
             >
               Captured in unknown location,
-              <br />• {formatDate(photo.createdAt)}
+              <br />• {formatDate(photo?.createdAt)}
             </p>
           </div>
 

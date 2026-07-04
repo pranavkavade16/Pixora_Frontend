@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../customHooks/useFetch";
 
@@ -52,9 +52,15 @@ export default function PhotoDetailPage() {
     error: imageError,
   } = useFetch(`https://pixora-backend-roan.vercel.app/image/${imageId}`);
 
-  console.log("photo details page", imageData);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    if (imageData) {
+      setImage(imageData);
+    }
+  }, [imageData]);
+
   const [favorite, setFavorite] = useState(false);
-  const [tags, setTags] = useState(SAMPLE_PHOTO.tags);
   const [comments, setComments] = useState(SAMPLE_PHOTO.comments);
 
   const photo = useMemo(
@@ -67,15 +73,6 @@ export default function PhotoDetailPage() {
 
   const removeTag = (tag) => {
     setTags((current) => current.filter((item) => item !== tag));
-  };
-
-  const addTag = (tag) => {
-    if (!tag?.trim()) return;
-
-    setTags((current) => {
-      if (current.includes(tag)) return current;
-      return [...current, tag];
-    });
   };
 
   const addComment = (text) => {
@@ -112,10 +109,11 @@ export default function PhotoDetailPage() {
       ======================================================= */}
       <div className="flex-1 overflow-hidden lg:hidden">
         <PhotoMobileDetails
-          photo={imageData?.data}
-          favorite={imageData?.isFavorite}
+          photo={image?.data}
+          favorite={image?.isFavorite}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
-          tags={imageData?.tags}
+          tags={image?.tags}
+          setImage={setImage}
           onRemoveTag={removeTag}
           onAddTag={addTag}
         />
@@ -126,11 +124,12 @@ export default function PhotoDetailPage() {
       ======================================================= */}
       <div className="hidden flex-1 overflow-hidden lg:block">
         <PhotoDesktopDetails
-          photo={imageData?.data}
-          favorite={imageData?.isFavorite}
+          photo={image?.data}
+          setImage={setImage}
+          favorite={image?.data?.isFavorite}
+          tags={image?.data?.tags}
+          comments={image?.data?.comments}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
-          tags={imageData?.tags}
-          comments={imageData?.comments}
           onRemoveTag={removeTag}
           onAddTag={addTag}
           onAddComment={addComment}

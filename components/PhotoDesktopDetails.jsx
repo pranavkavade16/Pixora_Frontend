@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Plus, Share2, Star, Trash2, Send, X } from "lucide-react";
 import { formatDate } from "../utils/formatDate";
+import useAddTags from "../features/photos/hooks/useAddTags";
 
 export default function PhotoDesktopDetails({
   photo,
@@ -8,14 +9,15 @@ export default function PhotoDesktopDetails({
   onToggleFavorite,
   tags,
   comments,
+  setImage,
   onRemoveTag,
   onAddTag,
   onAddComment,
 }) {
+  const { handleAddTags, loading } = useAddTags();
+  console.log("setImage:", setImage);
   const [newTag, setNewTag] = useState("");
   const [comment, setComment] = useState("");
-
-  console.log("photo desktop details component", photo, photo.tags);
 
   const metadata = [
     {
@@ -36,12 +38,21 @@ export default function PhotoDesktopDetails({
     },
   ];
 
-  const handleAddTag = () => {
+  const addTag = async () => {
     if (!newTag.trim()) return;
 
     const tag = newTag.startsWith("#") ? newTag : `#${newTag}`;
 
-    onAddTag(tag);
+    const updatedTags = [...photo.tags, tag];
+    console.log(updatedTags);
+    const response = await handleAddTags(photo._id, updatedTags);
+
+    if (response) {
+      setImage((prev) => ({
+        ...prev,
+        data: { ...prev.data, tags: updatedTags },
+      }));
+    }
     setNewTag("");
   };
 
@@ -89,7 +100,7 @@ export default function PhotoDesktopDetails({
                   text-[#111110]
                 "
               >
-                {photo.name}
+                {photo?.name}
               </h1>
 
               <p
@@ -99,7 +110,7 @@ export default function PhotoDesktopDetails({
                   text-[#5f5e5b]
                 "
               >
-                Captured in unknow location • {formatDate(photo.createdAt)}
+                Captured in unknow location • {formatDate(photo?.createdAt)}
               </p>
             </div>
 
@@ -206,7 +217,7 @@ export default function PhotoDesktopDetails({
 
               <button
                 type="button"
-                onClick={handleAddTag}
+                onClick={addTag}
                 className="
                   flex h-10 items-center gap-2
                   rounded-xl
