@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../customHooks/useFetch";
-
+import useAddTags from "../features/photos/hooks/useAddTags";
 import PhotoViewer from "../components/PhotoViewer";
 import PhotoDesktopDetails from "../components/PhotoDesktopDetails";
 import PhotoMobileDetails from "../components/PhotoMobileDetails";
@@ -45,7 +45,7 @@ const SAMPLE_PHOTO = {
 
 export default function PhotoDetailPage() {
   const { imageId } = useParams();
-
+  const { handleAddTags } = useAddTags();
   const {
     data: imageData,
     loading: imageLoading,
@@ -71,8 +71,17 @@ export default function PhotoDetailPage() {
     [imageId],
   );
 
-  const removeTag = (tag) => {
-    setTags((current) => current.filter((item) => item !== tag));
+  const removeTag = async (tag) => {
+    const filteredTags = image.data.tags.filter((item) => item !== tag);
+
+    const response = await handleAddTags(image.data._id, filteredTags);
+
+    if (response) {
+      setImage((prev) => ({
+        ...prev,
+        data: { ...prev, tags: filteredTags },
+      }));
+    }
   };
 
   const addComment = (text) => {
@@ -112,10 +121,9 @@ export default function PhotoDetailPage() {
           photo={image?.data}
           favorite={image?.isFavorite}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
-          tags={image?.tags}
+          tags={image?.data?.tags}
           setImage={setImage}
           onRemoveTag={removeTag}
-          onAddTag={addTag}
         />
       </div>
 
@@ -131,7 +139,6 @@ export default function PhotoDetailPage() {
           comments={image?.data?.comments}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
           onRemoveTag={removeTag}
-          onAddTag={addTag}
           onAddComment={addComment}
         />
       </div>

@@ -15,7 +15,6 @@ export default function PhotoDesktopDetails({
   onAddComment,
 }) {
   const { handleAddTags, loading } = useAddTags();
-  console.log("setImage:", setImage);
   const [newTag, setNewTag] = useState("");
   const [comment, setComment] = useState("");
 
@@ -44,7 +43,7 @@ export default function PhotoDesktopDetails({
     const tag = newTag.startsWith("#") ? newTag : `#${newTag}`;
 
     const updatedTags = [...photo.tags, tag];
-    console.log(updatedTags);
+
     const response = await handleAddTags(photo._id, updatedTags);
 
     if (response) {

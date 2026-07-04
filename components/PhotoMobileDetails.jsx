@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { Plus, Share2, Star, Trash2, X } from "lucide-react";
 import { formatDate } from "../utils/formatDate";
+import useAddTags
+ from "../features/photos/hooks/useAddTags";
 
 export default function PhotoMobileDetails({
   photo,
   favorite,
   onToggleFavorite,
+  setImage,
   tags,
   onRemoveTag,
   onAddTag,
 }) {
   const [newTag, setNewTag] = useState("");
+  const { handleAddTags, loading } = useAddTags();
 
   const metadata = [
     {
@@ -31,12 +35,21 @@ export default function PhotoMobileDetails({
     },
   ];
 
-  const handleAddTag = () => {
+  const addTag = async () => {
     if (!newTag.trim()) return;
 
     const tag = newTag.startsWith("#") ? newTag : `#${newTag}`;
 
-    onAddTag(tag);
+    const updatedTags = [...photo.tags, tag];
+
+    const response = await handleAddTags(photo._id, updatedTags);
+
+    if (response) {
+      setImage((prev) => ({
+        ...prev,
+        data: { ...prev.data, tags: updatedTags },
+      }));
+    }
     setNewTag("");
   };
 
@@ -204,7 +217,7 @@ export default function PhotoMobileDetails({
 
             <button
               type="button"
-              onClick={handleAddTag}
+              onClick={addTag}
               className="
                 flex h-11
                 items-center gap-2
