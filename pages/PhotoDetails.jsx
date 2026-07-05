@@ -6,11 +6,13 @@ import PhotoViewer from "../components/PhotoViewer";
 import PhotoDesktopDetails from "../components/PhotoDesktopDetails";
 import PhotoMobileDetails from "../components/PhotoMobileDetails";
 import useAddComment from "../features/photos/hooks/useAddComment";
+import useToggleFavorite from "../features/photos/hooks/useToggleFavorite";
 
 export default function PhotoDetailPage() {
   const { imageId } = useParams();
   const { handleAddTags } = useAddTags();
   const { handleAddComment } = useAddComment();
+  const { handleToggleFavorite } = useToggleFavorite();
   const {
     data: imageData,
     loading: imageLoading,
@@ -92,6 +94,25 @@ export default function PhotoDetailPage() {
     }));
   };
 
+  const toggleFavorite = async () => {
+    const response = await handleToggleFavorite({
+      albumId: image.data.albumId,
+      imageId: image.data._id,
+      isFavorite: !image.data.isFavorite,
+    });
+
+    console.log("Successfully toggled");
+
+    if (!response) return;
+
+    setImage((prev) => ({
+      ...prev,
+      data: {
+        ...prev.data,
+        isFavorite: !prev.data.isFavorite,
+      },
+    }));
+  };
   if (imageLoading) {
     return <div>Loading...</div>;
   }
@@ -116,7 +137,7 @@ export default function PhotoDetailPage() {
         <PhotoMobileDetails
           photo={image?.data}
           favorite={image?.isFavorite}
-          onToggleFavorite={() => setFavorite((prev) => !prev)}
+          onToggleFavorite={toggleFavorite}
           tags={image?.data?.tags}
           onAddTag={addTag}
           onRemoveTag={removeTag}
@@ -133,7 +154,7 @@ export default function PhotoDetailPage() {
           onAddTag={addTag}
           favorite={image?.data?.isFavorite}
           comments={image?.data?.comments}
-          onToggleFavorite={() => setFavorite((prev) => !prev)}
+          onToggleFavorite={toggleFavorite}
           onRemoveTag={removeTag}
           onAddComment={addComment}
         />
