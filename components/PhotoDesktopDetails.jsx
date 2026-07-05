@@ -280,58 +280,63 @@ export default function PhotoDesktopDetails({
               mt-6
               max-h-65
               overflow-y-auto
-              space-y-5
+              space-y-3
+              pr-2
             "
           >
-            {photo?.comments?.map((comment) => (
-              <div key={comment.id} className="flex gap-3">
-                <div
-                  className="
-                    flex h-9 w-9 shrink-0
-                    items-center justify-center
-                    rounded-full
-                    text-[11px]
-                    font-bold
-                  "
-                  style={{
-                    backgroundColor: comment.avatarBg,
-                  }}
-                >
-                  {comment.initials}
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span
+            {photo?.comments?.map((comment, index) => (
+              <div
+                key={index}
+                className="
+      rounded-2xl
+      border border-[#e5e4e1]
+      bg-[#f8f8f7]
+      p-4
+      transition-all
+      hover:border-[#d7d6d3]
+      hover:shadow-sm
+    "
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div
                       className="
-                        text-sm
-                        font-medium
-                      "
+            flex h-9 w-9
+            items-center justify-center
+            rounded-full
+            bg-[#4241bc]
+            text-sm
+            font-semibold
+            text-white
+          "
                     >
-                      {comment.name}
-                    </span>
+                      {comment.text?.charAt(0).toUpperCase()}
+                    </div>
 
-                    <span
-                      className="
-                        text-xs
-                        text-[#a8a7a4]
-                      "
-                    >
-                      {comment.time}
-                    </span>
+                    <div>
+                      <p className="text-sm font-medium text-[#111110]">You</p>
+
+                      <p className="text-xs text-[#8a8885]">
+                        {formatDate(comment.createdAt)}
+                      </p>
+                    </div>
                   </div>
-
-                  <p
-                    className="
-                      mt-1
-                      text-sm
-                      leading-relaxed
-                      text-[#464553]
-                    "
-                  >
-                    {comment.text}
-                  </p>
                 </div>
+
+                <p
+                  className="
+        mt-3
+        rounded-xl
+        bg-white
+        px-3
+        py-2
+        text-sm
+        leading-relaxed
+        text-[#464553]
+      "
+                >
+                  {comment.text}
+                </p>
               </div>
             ))}
           </div>
