@@ -59,27 +59,23 @@ export default function PhotoDetailPage() {
       },
     }));
   };
-
   const addComment = async (newComment) => {
-    const updatedComments = [...(image.data.comments || [])];
+    if (!newComment.trim()) return;
 
-    if (updatedComments.includes(newComment)) return;
+    const response = await handleAddComment({
+      imageId: image.data._id,
+      userId: "6a31773c0dc54daa4bd9902e",
+      comment: newComment,
+    });
 
-    updatedComments.push(newComment);
-
-    const response = await handleAddComment(image.data._id, updatedComments);
-
+    console.log(response);
     if (!response) return;
 
     setImage((prev) => ({
       ...prev,
-      data: {
-        ...prev.data,
-        comments: updatedComments,
-      },
+      data: response.data,
     }));
   };
-
   const removeTag = async (tagToRemove) => {
     const updatedTags = image.data.tags.filter((tag) => tag !== tagToRemove);
 
@@ -94,21 +90,6 @@ export default function PhotoDetailPage() {
         tags: updatedTags,
       },
     }));
-  };
-
-  const addComment = (text) => {
-    if (!text.trim()) return;
-
-    const newComment = {
-      id: Date.now(),
-      initials: "YO",
-      name: "You",
-      time: "Just now",
-      text,
-      avatarBg: "#dbeafe",
-    };
-
-    setComments((current) => [newComment, ...current]);
   };
 
   if (imageLoading) {

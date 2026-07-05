@@ -4,12 +4,16 @@ import { useState } from "react";
 const useAddComment = () => {
   const [loading, setLoading] = useState(false);
 
-  const handleAddComment = async (imageId, comment) => {
+  const handleAddComment = async ({ imageId, userId, comment }) => {
     setLoading(true);
+    console.log(imageId, userId, comment);
     try {
       const response = await axios.patch(
         `https://pixora-backend-roan.vercel.app/image/${imageId}/comment`,
-        comment,
+        {
+          userId,
+          text: comment,
+        },
       );
 
       console.log("Uploading");
