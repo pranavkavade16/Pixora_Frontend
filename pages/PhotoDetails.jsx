@@ -5,10 +5,12 @@ import useAddTags from "../features/photos/hooks/useAddTags";
 import PhotoViewer from "../components/PhotoViewer";
 import PhotoDesktopDetails from "../components/PhotoDesktopDetails";
 import PhotoMobileDetails from "../components/PhotoMobileDetails";
+import useAddComment from "../features/photos/hooks/useAddComment";
 
 export default function PhotoDetailPage() {
   const { imageId } = useParams();
   const { handleAddTags } = useAddTags();
+  const { handleAddComment } = useAddComment();
   const {
     data: imageData,
     loading: imageLoading,
@@ -54,6 +56,26 @@ export default function PhotoDetailPage() {
       data: {
         ...prev.data,
         tags: updatedTags,
+      },
+    }));
+  };
+
+  const addComment = async (newComment) => {
+    const updatedComments = [...(image.data.comments || [])];
+
+    if (updatedComments.includes(newComment)) return;
+
+    updatedComments.push(newComment);
+
+    const response = await handleAddComment(image.data._id, updatedComments);
+
+    if (!response) return;
+
+    setImage((prev) => ({
+      ...prev,
+      data: {
+        ...prev.data,
+        comments: updatedComments,
       },
     }));
   };
@@ -117,6 +139,7 @@ export default function PhotoDetailPage() {
           tags={image?.data?.tags}
           onAddTag={addTag}
           onRemoveTag={removeTag}
+          onAddComment={addComment}
         />
       </div>
 
