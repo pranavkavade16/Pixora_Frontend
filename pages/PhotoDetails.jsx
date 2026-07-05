@@ -6,43 +6,6 @@ import PhotoViewer from "../components/PhotoViewer";
 import PhotoDesktopDetails from "../components/PhotoDesktopDetails";
 import PhotoMobileDetails from "../components/PhotoMobileDetails";
 
-const SAMPLE_PHOTO = {
-  id: 1,
-  title: "Ethereal Symmetry #04",
-  location: "Kyoto, Japan",
-  date: "Oct 12, 2023",
-  image:
-    "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1800&auto=format&fit=crop",
-
-  tags: ["#minimalism", "#architecture", "#editorial"],
-
-  metadata: {
-    iso: "100",
-    aperture: "f/2.8",
-    shutter: "1/250s",
-    camera: "Sony A7R IV",
-  },
-
-  comments: [
-    {
-      id: 1,
-      initials: "ED",
-      name: "Elena Drago",
-      time: "2h ago",
-      text: "The composition here is breathtaking. The balance of light and shadow is perfect.",
-      avatarBg: "#e5e2de",
-    },
-    {
-      id: 2,
-      initials: "MK",
-      name: "Marcus Keat",
-      time: "5h ago",
-      text: "Great use of negative space.",
-      avatarBg: "#e2dfff",
-    },
-  ],
-};
-
 export default function PhotoDetailPage() {
   const { imageId } = useParams();
   const { handleAddTags } = useAddTags();
@@ -61,27 +24,54 @@ export default function PhotoDetailPage() {
   }, [imageData]);
 
   const [favorite, setFavorite] = useState(false);
-  const [comments, setComments] = useState(SAMPLE_PHOTO.comments);
+  //   const [comments, setComments] = useState(SAMPLE_PHOTO.comments);
 
-  const photo = useMemo(
-    () => ({
-      ...SAMPLE_PHOTO,
-      imageId,
-    }),
-    [imageId],
-  );
+  //   const photo = useMemo(
+  //     () => ({
+  //       ...SAMPLE_PHOTO,
+  //       imageId,
+  //     }),
+  //     [imageId],
+  //   );
 
-  const removeTag = async (tag) => {
-    const filteredTags = image.data.tags.filter((item) => item !== tag);
+  const addTag = async (newTag) => {
+    if (!newTag.trim()) return;
 
-    const response = await handleAddTags(image.data._id, filteredTags);
+    const tag = newTag.startsWith("#") ? newTag : `#${newTag}`;
 
-    if (response) {
-      setImage((prev) => ({
-        ...prev,
-        data: { ...prev, tags: filteredTags },
-      }));
-    }
+    const updatedTags = [...(image.data.tags || [])];
+
+    if (updatedTags.includes(tag)) return;
+
+    updatedTags.push(tag);
+
+    const response = await handleAddTags(image.data._id, updatedTags);
+
+    if (!response) return;
+
+    setImage((prev) => ({
+      ...prev,
+      data: {
+        ...prev.data,
+        tags: updatedTags,
+      },
+    }));
+  };
+
+  const removeTag = async (tagToRemove) => {
+    const updatedTags = image.data.tags.filter((tag) => tag !== tagToRemove);
+
+    const response = await handleAddTags(image.data._id, updatedTags);
+
+    if (!response) return;
+
+    setImage((prev) => ({
+      ...prev,
+      data: {
+        ...prev.data,
+        tags: updatedTags,
+      },
+    }));
   };
 
   const addComment = (text) => {
@@ -111,7 +101,10 @@ export default function PhotoDetailPage() {
       {/* =======================================================
           IMAGE VIEWER
       ======================================================= */}
-      <PhotoViewer image={imageData?.data?.imageUrl} title={photo.title} />
+      <PhotoViewer
+        image={imageData?.data?.imageUrl}
+        title={imageData?.data?.name}
+      />
 
       {/* =======================================================
           MOBILE DETAILS
@@ -122,7 +115,7 @@ export default function PhotoDetailPage() {
           favorite={image?.isFavorite}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
           tags={image?.data?.tags}
-          setImage={setImage}
+          onAddTag={addTag}
           onRemoveTag={removeTag}
         />
       </div>
@@ -133,9 +126,8 @@ export default function PhotoDetailPage() {
       <div className="hidden flex-1 overflow-hidden lg:block">
         <PhotoDesktopDetails
           photo={image?.data}
-          setImage={setImage}
+          onAddTag={addTag}
           favorite={image?.data?.isFavorite}
-          tags={image?.data?.tags}
           comments={image?.data?.comments}
           onToggleFavorite={() => setFavorite((prev) => !prev)}
           onRemoveTag={removeTag}

@@ -9,12 +9,10 @@ export default function PhotoDesktopDetails({
   onToggleFavorite,
   tags,
   comments,
-  setImage,
   onRemoveTag,
   onAddTag,
   onAddComment,
 }) {
-  const { handleAddTags, loading } = useAddTags();
   const [newTag, setNewTag] = useState("");
   const [comment, setComment] = useState("");
 
@@ -38,20 +36,7 @@ export default function PhotoDesktopDetails({
   ];
 
   const addTag = async () => {
-    if (!newTag.trim()) return;
-
-    const tag = newTag.startsWith("#") ? newTag : `#${newTag}`;
-
-    const updatedTags = [...photo.tags, tag];
-
-    const response = await handleAddTags(photo._id, updatedTags);
-
-    if (response) {
-      setImage((prev) => ({
-        ...prev,
-        data: { ...prev.data, tags: updatedTags },
-      }));
-    }
+    onAddTag(newTag);
     setNewTag("");
   };
 
