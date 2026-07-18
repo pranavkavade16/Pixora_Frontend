@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../customHooks/useFetch";
 import useAddTags from "../features/photos/hooks/useAddTags";
 import PhotoViewer from "../components/PhotoViewer";
@@ -7,12 +7,15 @@ import PhotoDesktopDetails from "../components/PhotoDesktopDetails";
 import PhotoMobileDetails from "../components/PhotoMobileDetails";
 import useAddComment from "../features/photos/hooks/useAddComment";
 import useToggleFavorite from "../features/photos/hooks/useToggleFavorite";
+import useDeleteImage from "../features/photos/hooks/useDeleteImage";
 
 export default function PhotoDetailPage() {
   const { imageId } = useParams();
   const { handleAddTags } = useAddTags();
   const { handleAddComment } = useAddComment();
   const { handleToggleFavorite } = useToggleFavorite();
+  const navigate = useNavigate();
+  const { handleDeleteImage } = useDeleteImage();
   const {
     data: imageData,
     loading: imageLoading,
@@ -113,6 +116,19 @@ export default function PhotoDetailPage() {
       },
     }));
   };
+
+  const deleteImage = async () => {
+    const response = await handleDeleteImage({
+      albumId: image.data.albumId,
+      imageId: image.data._id,
+      userId: "6a31773c0dc54daa4bd9902e",
+    });
+
+    if (!response) return;
+    console.log("Image deleted");
+    // Navigate back to the album page
+    navigate(`/albumDetails/${image.data.albumId}`);
+  };
   if (imageLoading) {
     return <div>Loading...</div>;
   }
@@ -157,6 +173,7 @@ export default function PhotoDetailPage() {
           onToggleFavorite={toggleFavorite}
           onRemoveTag={removeTag}
           onAddComment={addComment}
+          onDelete={deleteImage}
         />
       </div>
     </main>

@@ -12,6 +12,7 @@ export default function PhotoDesktopDetails({
   onRemoveTag,
   onAddTag,
   onAddComment,
+  onDelete,
 }) {
   const [newTag, setNewTag] = useState("");
   const [comment, setComment] = useState("");
@@ -139,6 +140,7 @@ export default function PhotoDesktopDetails({
               {/* Delete */}
               <button
                 type="button"
+                onClick={onDelete}
                 className="
                   flex h-12 w-12 items-center justify-center
                   rounded-xl border border-[#e5e4e1]
